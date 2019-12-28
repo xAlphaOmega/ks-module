@@ -1,0 +1,22 @@
+.bg-gamma {
+    background: $primary !important;
+    color: $theme-text-color !important;
+}
+.o_wblog_post {
+    .badge-primary {
+        width: auto;
+        height: auto;
+        padding: 5px;
+        border-radius: 0;
+    }
+}
+
+@keyframes o-wblog-anim-heart {
+    0%, 14%, 35% {
+        transform: scale(1);
+    }
+    7%, 21% {
+        transform: scale(1.3);
+        background-color: $primary;
+    }
+}

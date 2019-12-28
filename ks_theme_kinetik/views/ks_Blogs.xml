@@ -1,0 +1,48 @@
+<odoo>
+    <template id="snippet_blogs_home_page" name="Latest Blog">
+        <section class="snippet_blogs_home_page">
+            <div class="ks_container_2 m-auto ks_dynamic_blog" >
+            </div>
+        </section>
+    </template>
+
+    <template id="ks_blogs_animation_options" inherit_id="website.snippet_options" name="Product blogs Snippet animation Options">
+    <xpath expr="." position="inside">
+        <div data-selector=".snippet_blogs_home_page"
+            data-no-check="true">
+            <we-collapse-area class="animations_ppr_submenu">
+                <we-toggler>
+                    <i class="fa fa-spinner fa-pulse"/> Animation Options
+                </we-toggler>
+                <we-collapse data-no-preview="true">
+                    <label>Simple Animations
+                    <we-button  data-select-class="animated flash">flash</we-button>
+                    <we-button data-select-class="animated bounce">bounce</we-button>
+                    <we-button data-select-class="animated pulse">pulse</we-button>
+                      </label>
+                    <label>Fading Entrances
+                     <we-button  data-select-class="animated fadeIn">fadeIn</we-button>
+                    <we-button data-select-class="animated fadeInDown">fadeInDown</we-button>
+                    <we-button data-select-class="animated fadeInLeft">fadeInLeft</we-button>
+                     <we-button data-select-class="animated fadeInUp">fadeInUp</we-button>
+                    <we-button data-select-class="animated fadeInRight">fadeInRight</we-button>
+                    </label>
+                     <label>Sliding Entrances
+                     <we-button  data-select-class="animated slideInDown">slideInDown</we-button>
+                    <we-button data-select-class="animated slideInLeft">slideInLeft</we-button>
+                    <we-button data-select-class="animated slideInUp">slideInUp</we-button>
+                     <we-button data-select-class="animated slideInRight">slideInRight</we-button>
+                    </label>
+                    <label>Zooming Entrances
+                     <we-button  data-select-class="animated zoomIn">zoomIn</we-button>
+                    <we-button data-select-class="animated zoomInDown">zoomInDown</we-button>
+                    <we-button data-select-class="animated zoomInLeft">zoomInLeft</we-button>
+                     <we-button data-select-class="animated zoomInUp">zoomInUp</we-button>
+                    <we-button data-select-class="animated zoomInRight">zoomInRight</we-button>
+                    </label>
+                </we-collapse>
+            </we-collapse-area>
+        </div>
+    </xpath>
+</template>
+</odoo>

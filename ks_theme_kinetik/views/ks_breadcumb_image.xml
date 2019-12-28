@@ -1,0 +1,33 @@
+<odoo>
+ <data>
+        <record model="ir.ui.view" id="ks_breadcumb_list">
+            <field name="name">Shop Page Breadcumb Image</field>
+            <field name="model">ks_theme_kinetik.ks_breadcumb</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false">
+                     <field name="name"/>
+                    <field name="breadcumb_image"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ks_breadcumb_form">
+            <field name="name">Shop Page Breadcumb Image</field>
+            <field name="model">ks_theme_kinetik.ks_breadcumb</field>
+            <field name="arch" type="xml">
+                <form create="false" delete="false">
+                    <group>
+                         <field name="name"/>
+                        <field name="breadcumb_image"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ks_breadcumb_action_window">
+            <field name="name">Shop Page Breadcumb Image</field>
+            <field name="res_model">ks_theme_kinetik.ks_breadcumb</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Breadcumb Image Settings" parent="website.menu_website_global_configuration" id="ks_breadcumbs_menu_root"
+                  action="ks_breadcumb_action_window"/>
+    </data>
+</odoo>

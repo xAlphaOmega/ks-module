@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>4-products</title>
+    <desc>Created with Sketch.</desc>
+    <g id="4-products" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(10.000000, 10.000000)" fill="#000000">
+            <rect id="Rectangle" x="0" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="22" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="44" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="65" y="0" width="15" height="20"></rect>
+        </g>
+        <g id="Group" transform="translate(10.000000, 70.000000)" fill="#000000">
+            <rect id="Rectangle" x="0" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="22" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="44" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="65" y="0" width="15" height="20"></rect>
+        </g>
+        <g id="Group" transform="translate(10.000000, 40.000000)" fill="#000000">
+            <rect id="Rectangle" x="0" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="22" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="44" y="0" width="15" height="20"></rect>
+            <rect id="Rectangle" x="65" y="0" width="15" height="20"></rect>
+        </g>
+    </g>
+</svg>
