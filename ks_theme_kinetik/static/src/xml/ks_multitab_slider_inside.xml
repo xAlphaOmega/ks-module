@@ -1,0 +1,227 @@
+<templates>
+    <t t-name="snippet_multi_tab">
+        <section class="py-lg-5 py-3">
+            <div id="product_btn_group" class="text-center">
+                <ul class="nav nav-tabs d-flex justify-content-center" role="tablist">
+                    <t t-foreach="products.tab_names" t-as="tab">
+                        <li t-att-class="'tabs-li nav-item '+'ks_tab_list'+products.slider_id">
+                            <input t-att-class="tab[3]+products.slider_id+'slider_id'" t-att-value="products.slider_id" type="hidden"/>
+                            <a t-att-href="tab[2]+products.slider_id"
+                               data-toggle="tab"
+                               t-att-class="'ks_'+tab[3]+products.slider_id">
+                                <button id="new_arrivals"
+                                        class="theme__btn-2 mt-lg-4 mt-2  mx-2 featured_btn">
+                                    <t t-esc="tab[1]"/>
+                                </button>
+                            </a>
+                        </li>
+                    </t>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <t t-foreach="products.tab_names" t-as="tab">
+                    <t t-if="tab_index==0">
+                        <div t-att-id="tab[3]+products.slider_id"
+                             t-att-class=" 'ks_multitab-'+products.slider_id + ' tab-pane row no-gutters active ' +tab[3]+products.slider_id">
+                            <div id="tabs-product-owl-id" class="owl-carousel tabs-product-owl products-carousel owl-theme">
+                                <t t-foreach="tab[0]" t-as="prods">
+                                    <div class="mt-4 mt-md-5 product-card">
+                                        <div class="fp__img position-relative text-center">
+                                            <a itemprop="url" class="wishlist-select">
+                                                <t t-if="is_ks_wishlist">
+                                                    <button type="button" role="button"
+                                                            class="btn btn-secondary btn-sm o_add_wishlist"
+                                                            t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                                            t-att-data-product-template-id="prods.prod_id"
+                                                            t-att-data-product-product-id="prods.ks_product_var_id"
+                                                            data-action="o_wishlist">
+                                                        <span class="fa fa-heart-o show-wishlist" aria-label="Add to wishlist" />
+                                                        <span class="fa fa-heart show-hover" aria-label="Add to wishlist" />
+                                                    </button>
+                                                </t>
+                                            </a>
+                                            <a t-att-href="prods.prod_url" id="fp-1"
+                                               class="featured__product">
+                                                <img t-att-src="prods.product_img"/>
+                                            </a>
+                                        </div>
+                                        <div class="fp__info py-3 px-3">
+                                            <a t-att-href="prods.prod_url" id="fp-1" class="featured__product">
+                                                <div class="row no-gutters">
+                                                    <div class="col-12">
+                                                        <div class="fp__name text-truncate text-left">
+                                                            <t t-esc="prods.product_name"/>
+                                                        </div>
+                                                        <div class="fp__brand">
+                                                            <t t-if='prods.brand_name'>
+                                                                <t t-esc="prods.brand_name"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fp__price">
+                                                        <div class="fp__current_price d-flex">
+                                                            <t t-if="website_currency_position == 'before'">
+                                                                <t t-esc="prods.website_currency_id"/>
+                                                            </t>
+                                                            <span t-esc="prods.website_price"/>
+                                                            <t t-if="website_currency_position == 'after'">
+                                                                <t t-esc="prods.website_currency_id"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                             <div class="wishlist_and_comparision row no-gutters">
+                                                <t t-set="product_variant_id" t-value='prods.ks_product_var_id'/>
+                                                <t t-if="is_ks_cart">
+                                                    <div class="col">
+                                                        <form action="/ks_shop/cart/update" method="post"
+                                                              class="text-center">
+                                                            <input name="product_id" t-att-value="prods.ks_product_var_id"
+                                                                   type="hidden"/>
+                                                             <a href="#" role="button" class="btn btn-secondary btn-sm a-submit ks_custom_cart_link" aria-label="Shopping cart" title="Shopping cart">
+                                                            Add To Cart
+                                                          </a>
+                                                            <a class="ks_add_to_cart btn btn-secondary btn-sm a-submit "
+                                                               t-att-data-product-product-id="prods.ks_product_var_id">
+                                                                <span class="fa fa-shopping-cart"/>
+                                                            </a>
+                                                        </form>
+                                                    </div>
+                                                </t>
+                                                <t t-if="is_ks_product_det">
+                                                    <div class="col ks_custom_d_none_info">
+                                                        <a class="btn btn-secondary btn-sm o_quick_view" data-toggle="modal"
+                                                           data-target="#product_quick_preview_Modal" title="quick_preview"
+                                                           t-att-data-product-product-id="prods.ks_product_var_id"
+                                                           t-att-data-product-template-id="prods.prod_id">
+                                                            <span class="fa fa-info-circle" role="img"
+                                                                  aria-label="Product Information"/>
+                                                        </a>
+                                                    </div>
+                                                </t>
+                                                <t t-if="is_ks_compare">
+                                                    <div class="col ks_custom_d_none">
+                                                        <button type="button" role="button"
+                                                                class="d-none d-md-inline-block btn btn-secondary btn-sm o_add_compare"
+                                                                title="Compare" aria-label="Compare"
+                                                                t-att-data-product-template-id="prods.prod_id"
+                                                                t-att-data-product-product-id="prods.ks_product_var_id"
+                                                                data-action="o_comparelist">
+                                                            <span class="fa fa-exchange"/>
+                                                        </button>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div t-att-id="tab[3]+products.slider_id"
+                             t-att-class=" 'ks_multitab-'+products.slider_id + ' tab-pane row no-gutters ' +tab[3]+products.slider_id">
+                            <div id="tabs-product-owl-id" class="owl-carousel tabs-product-owl products-carousel owl-theme">
+                                <t t-foreach="tab[0]" t-as="prods">
+                                    <div class="mt-4 mt-md-5 product-card">
+                                        <div class="fp__img position-relative text-center">
+                                            <a itemprop="url" class="wishlist-select">
+                                                <t t-if="is_ks_wishlist">
+                                                    <button type="button" role="button"
+                                                            class="btn btn-secondary btn-sm o_add_wishlist"
+                                                            t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                                            t-att-data-product-template-id="prods.prod_id"
+                                                            t-att-data-product-product-id="prods.ks_product_var_id"
+                                                            data-action="o_wishlist">
+                                                        <span class="fa fa-heart-o show-wishlist" aria-label="Add to wishlist" />
+                                                        <span class="fa fa-heart show-hover" aria-label="Add to wishlist" />
+                                                    </button>
+                                                </t>
+                                            </a>
+                                            <a t-att-href="prods.prod_url" id="fp-1"
+                                               class="featured__product">
+                                                <img t-att-src="prods.product_img"/>
+                                            </a>
+                                        </div>
+                                        <div class="fp__info py-3 px-3">
+                                            <a t-att-href="prods.prod_url" id="fp-1" class="featured__product">
+                                                <div class="row no-gutters">
+                                                    <div class="col-12">
+                                                        <div class="fp__name text-truncate text-left">
+                                                            <t t-esc="prods.product_name"/>
+                                                        </div>
+                                                        <div class="fp__brand">
+                                                            <t t-if='prods.brand_name'>
+                                                                <t t-esc="prods.brand_name"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fp__price">
+                                                        <div class="fp__current_price d-flex">
+                                                            <t t-if="website_currency_position == 'before'">
+                                                                <t t-esc="prods.website_currency_id"/>
+                                                            </t>
+                                                            <span t-esc="prods.website_price"/>
+                                                            <t t-if="website_currency_position == 'after'">
+                                                                <t t-esc="prods.website_currency_id"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="wishlist_and_comparision row no-gutters">
+                                                <t t-set="product_variant_id" t-value='prods.ks_product_var_id'/>
+                                                <t t-if="is_ks_cart">
+                                                    <div class="col">
+                                                        <form action="/ks_shop/cart/update" method="post"
+                                                              class="text-center">
+                                                            <input name="product_id" t-att-value="prods.ks_product_var_id"
+                                                                   type="hidden"/>
+                                                             <a href="#" role="button" class="btn btn-secondary btn-sm a-submit ks_custom_cart_link" aria-label="Shopping cart" title="Shopping cart">
+                                                            Add To Cart
+                                                          </a>
+                                                            <a class="ks_add_to_cart btn btn-secondary btn-sm a-submit "
+                                                               t-att-data-product-product-id="prods.ks_product_var_id">
+                                                                <span class="fa fa-shopping-cart"/>
+                                                            </a>
+                                                        </form>
+                                                    </div>
+                                                </t>
+                                                <t t-if="is_ks_product_det">
+                                                    <div class="col ks_custom_d_none_info">
+                                                        <a class="btn btn-secondary btn-sm o_quick_view" data-toggle="modal"
+                                                           data-target="#product_quick_preview_Modal" title="quick_preview"
+                                                           t-att-data-product-product-id="prods.ks_product_var_id"
+                                                           t-att-data-product-template-id="prods.prod_id">
+                                                            <span class="fa fa-info-circle" role="img"
+                                                                  aria-label="Product Information"/>
+                                                        </a>
+                                                    </div>
+                                                </t>
+                                                <t t-if="is_ks_compare">
+                                                    <div class="col ks_custom_d_none">
+                                                        <button type="button" role="button"
+                                                                class="d-none d-md-inline-block btn btn-secondary btn-sm o_add_compare"
+                                                                title="Compare" aria-label="Compare"
+                                                                t-att-data-product-template-id="prods.prod_id"
+                                                                t-att-data-product-product-id="prods.ks_product_var_id"
+                                                                data-action="o_comparelist">
+                                                            <span class="fa fa-exchange"/>
+                                                        </button>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </section>
+    </t>
+</templates>
+
+

@@ -1,0 +1,200 @@
+<templates>
+    <t t-name="ks_snippet_product_slider">
+        <section class="py-4">
+            <div t-att-class="products.full_width_class">
+                <t t-if="products.prods.length">
+                    <h4 class="theme__heading mb-4" >
+                        <t t-esc="products.grid_name" />
+                    </h4>
+                    <div t-att-id="products.slider_id" class="owl-carousel products-carousel owl-theme">
+                        <t t-foreach="products.prods" t-as="prods">
+                            <div class="mt-3 product-card ks-slider-products">
+                                <div class="fp__img position-relative text-center">
+                                    <a itemprop="url" class="wishlist-select">
+                                        <t t-if="prods.is_ks_wishlist">
+                                            <button type="button" role="button"
+                                                    class="btn btn-secondary btn-sm o_add_wishlist"
+                                                    t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                                    t-att-data-product-template-id="prods.prod_id"
+                                                    t-att-data-product-product-id="prods.ks_product_var_id"
+                                                    data-action="o_wishlist">
+                                                <span class="fa fa-heart-o show-wishlist" aria-label="Add to wishlist" />
+                                                <span class="fa fa-heart show-hover" aria-label="Add to wishlist" />
+                                            </button>
+                                        </t>
+                                    </a>
+                                    <a t-att-href="prods.prod_url" id="fp-1"
+                                       class="featured__product">
+                                        <img t-att-src="prods.prod_image" />
+                                    </a>
+                                </div>
+                                <div class="fp__info py-3 px-3">
+                                    <a t-att-href="prods.prod_url" id="fp-1" class="featured__product">
+                                        <div class="row no-gutters">
+                                            <div class="col-12">
+                                                <div class="fp__name text-truncate text-left">
+                                                    <t t-esc="prods.product_name"/>
+                                                </div>
+                                                <div class="fp__brand">
+                                                    <t t-if='prods.brand_name'>
+                                                        <t t-esc="prods.brand_name"/>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                            <div class="fp__price">
+                                                <div class="fp__current_price d-flex">
+                                                    <t t-if="website_currency_position == 'before'">
+                                                        <t t-esc="prods.website_currency_id"/>
+                                                    </t>
+                                                    <span t-esc="prods.website_price"/>
+                                                    <t t-if="website_currency_position == 'after'">
+                                                        <t t-esc="prods.website_currency_id"/>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                     <div class="wishlist_and_comparision row no-gutters">
+                                        <t t-set="product_variant_id" t-value='prods.ks_product_var_id'/>
+                                        <t t-if="prods.is_ks_cart">
+                                            <div class="col">
+                                                <form action="/ks_shop/cart/update" method="post"
+                                                      class="text-center">
+                                                    <input name="product_id" t-att-value="prods.ks_product_var_id"
+                                                           type="hidden"/>
+                                                     <a href="#" role="button" class="btn btn-secondary btn-sm a-submit ks_custom_cart_link" aria-label="Shopping cart" title="Shopping cart">
+                                                            Add To Cart
+                                                          </a>
+                                                    <a class="ks_add_to_cart btn btn-secondary btn-sm a-submit "
+                                                       t-att-data-product-product-id="prods.ks_product_var_id">
+                                                        <span class="fa fa-shopping-cart"/>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                        </t>
+                                        <t t-if="prods.is_ks_product_det">
+                                            <div class="col ks_custom_d_none_info">
+                                                <a class="btn btn-secondary btn-sm o_quick_view" data-toggle="modal"
+                                                   data-target="#product_quick_preview_Modal" title="quick_preview"
+                                                   t-att-data-product-product-id="prods.ks_product_var_id"
+                                                   t-att-data-product-template-id="prods.prod_id">
+                                                    <span class="fa fa-info-circle" role="img"
+                                                          aria-label="Product Information"/>
+                                                </a>
+                                            </div>
+                                        </t>
+                                        <t t-if="prods.is_ks_compare">
+                                            <div class="col ks_custom_d_none">
+                                                <button type="button" role="button"
+                                                        class="d-none d-md-inline-block btn btn-secondary btn-sm o_add_compare"
+                                                        title="Compare" aria-label="Compare"
+                                                        t-att-data-product-product-id="prods.ks_product_var_id"
+                                                        data-action="o_comparelist">
+                                                    <span class="fa fa-exchange"/>
+                                                </button>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-if="products.trendy.length">
+                    <section>
+                        <h4 class="theme__heading mb-4" >
+                            <t t-esc="products.grid_name"/>
+                        </h4>
+                        <div id="trendy_styles_row" class="row no-gutters mx-2">
+                            <div t-att-id="products.slider_id" class="owl-carousel products-carousel owl-theme">
+                                <t t-foreach="products.trendy" t-as="prods">
+                                    <div class="mt-3 p-2">
+                                        <a t-att-href="prods.ks_url"
+                                           class="trendy__styles text-right d-block p-lg-0 position-relative">
+                                            <div class="ts__img">
+                                                <img t-att-src="prods.image_medium" alt="Image Not Availiable"
+                                                     class="ks-image-fluid" />
+                                            </div>
+                                            <div class="ks-ts-overlay">
+                                                <div class="ts__sm_text mt-md-2 mt-1">
+                                                    <t t-esc="prods.name"/>
+                                                </div>
+                                                <t t-if="prods.ks_product_category_slogan">
+                                                    <div class="ts__text my-md-2 my-1 ml-auto">
+                                                        <t t-esc="prods.ks_product_category_slogan"/>
+                                                    </div>
+                                                </t>
+                                                <button class="btn btn-primary ml-auto w-max-content">Shop Now</button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </section>
+                </t>
+                <t t-if="products.blogs.length">
+                    <h4 class="theme__heading mb-4" >
+                        <t t-esc="products.grid_name" />
+                    </h4>
+                    <div t-att-id="products.slider_id"
+                         class="owl-carousel owl-theme mt-md-4 row no-gutters blogs__row ks-blog-view-2 products-carousel">
+                        <t t-foreach="products.blogs" t-as="blog">
+                            <div class="p-2 ks-block-height">
+                                <div class="blog__card box__shadow py-sm-4 pl-sm-4 py-3 pl-3 mb-3">
+                                    <div class="d-flex blog-m-h">
+                                        <div class="blog_date">
+                                            <t t-esc="blog.ks_create_date"/>
+                                        </div>
+                                        <div class="blog_img w-100 text-right">
+                                            <img t-att-src="blog.ks_blog_url" class="w-100 h-100"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="pr-sm-4">
+                                        <div class="blog_heading text-truncate">
+                                            <t t-esc="blog.ks_name"/>
+                                            <br/>
+                                        </div>
+                                        <div class="blog_text my-2 text-left text-truncate">
+                                            <t t-esc="blog.ks_blog_content"/>
+                                        </div>
+                                        <div class="w-100 read-center">
+                                            <a t-att-href="blog.ks_link_redirect" class="btn btn-primary">Read
+                                                More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+
+                <t t-if="products.brands.length">
+                    <h4 class="theme__heading mb-4" >
+                        <t t-esc="products.grid_name" />
+                    </h4>
+                    <div t-att-id="products.slider_id"
+                         class="owl-carousel owl-theme row no-gutters brands__row ks_brands_home_page justify-content-center products-carousel">
+                        <t t-foreach="products.brands" t-as="brand">
+                            <div class="p-2  mt-2">
+                                <a t-att-href="url" class="text-center">
+                                    <div class="flex-column justify-content-center">
+                                        <div class="brand__img rounded-circle m-auto">
+                                            <img data-lazy="brand.brand_img"
+                                                 t-att-src="brand.brand_img" />
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="brand__logo position-relative bg-white flex-center m-auto">
+                                    <img t-att-src="brand.brand_logo" class="w-100" />
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </section>
+    </t>
+</templates>
